@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBN - Registo de Prestador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: url('Carpintaria.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background-color: whitesmoke;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+        }
+
+        .form-title {
+            background: whitesmoke;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 5px solid rgb(39, 38, 38);
+        }
+
+        .form-title h1 {
+            font-size: 1.5rem;
+            color: #0f2f66;
+        }
+
+        .form-body {
+            padding: 30px;
+        }
+
+        .grid-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgb(176, 176, 176);
+            border-radius: 6px;
+            background: white;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: #0056b3;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 90px;
+        }
+
+        .btn-enviar {
+            border-radius: 8px;
+            background-color: blue;
+            color: white;
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn-enviar:hover {
+            background-color: #003d82;
+            transform: translateY(-2px);
+        }
+
+       
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .grid-form {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .form-body {
+                padding: 20px;
+            }
+
+            .form-title h1 {
+                font-size: 1.2rem;
+            }
+
+            .btn-enviar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-title">
+            <h1>FORMULÁRIO DE REGISTO PARA PRESTADOR</h1>
+        </div>
+        
+        <form class="form-body" id="formPrestador">
+            <div class="grid-form">
+         
+                <div>
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Número / E-mail</label>
+                        <input type="text" id="contacto" placeholder="Digite seu número ou e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" id="bairro" placeholder="Digite o bairro">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" id="senha" placeholder="Insira sua senha" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirmar Senha</label>
+                        <input type="password" id="confirmaSenha" placeholder="Confirme sua senha" required>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group">
+                        <label>Nome Comercial</label>
+                        <input type="text" id="nomeComercial" placeholder="Ex: Carpintaria do Tio João" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Número de WhatsApp</label>
+                        <input type="text" id="whatsapp" placeholder="Número do WhatsApp" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoria de Serviço</label>
+                        <input type="text" id="categoria" placeholder="Ex: Carpintaria" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Portfólio (Descrição / Fotos)</label> 
+                        <textarea placeholder="Carregue ou descreva 6 fotos de serviços anteriores"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Selecionar Imagens do Portfólio</label>
+                        <input type="file" multiple accept="image/*">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-enviar">Enviar Registo</button>
+        </form>
+    </div>
+
+    <script>
+        // Validação de senhas e simulação de envio com JavaScript
+        const formPrestador = document.getElementById('formPrestador');
+
+        formPrestador.addEventListener('submit', (e) => {
+            e.preventDefault(); // Impede o envio padrão para validar primeiro
+
+            const senha = document.getElementById('senha').value;
+            const confirmaSenha = document.getElementById('confirmaSenha').value;
+            const nomeComercial = document.getElementById('nomeComercial').value;
+
+            if (senha !== confirmaSenha) {
+                alert("As senhas não coincidem! Por favor, verifique.");
+                document.getElementById('confirmaSenha').focus();
+                return;
+            }
+
+            // Sucesso simulado
+            alert(`Parabéns, ${nomeComercial}! O seu registo como prestador foi submetido com sucesso.`);
+            
+            // Redireciona para a página principal
+            window.location.href = "pagina principal.html";
+        });
+    </script>
+
+</body>
+</html>

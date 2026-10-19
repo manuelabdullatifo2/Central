@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBN - Comentários dos Clientes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgb(15, 15, 96);
+            padding: 10px 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 180px;
+            height: auto;
+            max-height: 70px;
+            object-fit: contain;
+        }
+
+        #menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        #menu-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        nav a.ativo {
+            font-weight: 700;
+            border-bottom: 2px solid white;
+            padding-bottom: 3px;
+        }
+
+        .btn-cadastrar {
+            background-color: blue;
+            color: white !important;
+            padding: 8px 14px !important;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .Coroa {
+            background: linear-gradient(180deg, rgb(146, 146, 237), rgb(169, 229, 229));
+            text-align: center;
+            padding: 40px 6%;
+            color: #0f2f66;
+        }
+
+        .Coroa h1 { 
+            font-size: 2.2rem; 
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .Coroa p {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .Rei {
+            max-width: 1050px; 
+            margin: 0 auto; 
+            padding: 25px 5% 40px;
+            width: 100%;
+        }
+
+        .filho1 {
+            background: white; 
+            border-radius: 16px; 
+            padding: 24px; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .filho1 h2 { 
+            font-size: 1.2rem; 
+            margin-bottom: 16px;
+            color: #0f2f66;
+        }
+
+        .filho2 {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 16px;
+        }
+
+        label {
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            color: rgb(43, 42, 42); 
+            display: block; 
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid rgb(206, 206, 231); 
+            border-radius: 10px;  
+            font-size: 0.9rem;
+            outline: none;
+            background: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: darkblue; 
+            box-shadow: 0 0 0 3px rgba(173, 173, 247, 0.5);
+        }
+
+        textarea {
+            height: 90px; 
+            resize: vertical;
+        }
+
+        .stars-select {
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            letter-spacing: 4px; 
+            user-select: none;
+            color: #ffc107;
+        }
+
+        .btn-enviar {
+            background: darkblue; 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            display: block;
+            margin-left: auto;
+            transition: background 0.2s;
+        }
+
+        .btn-enviar:hover {
+            background: #0000aa;
+        }
+
+        .titulo-lista {
+            margin: 35px 0 16px; 
+            font-weight: 800; 
+            color: darkblue; 
+            font-size: 1.3rem;
+        }
+
+        .grid {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 16px;
+        }
+
+        .card {
+            background: white; 
+            border-radius: 14px; 
+            padding: 18px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .card-top {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .user {
+            display: flex; 
+            gap: 10px; 
+            align-items: center;
+        }
+
+        .avatar {
+            background: rgb(229, 210, 104);
+            width: 42px; 
+            height: 42px; 
+            border-radius: 50%; 
+            display: grid;
+            place-items: center; 
+            color: white; 
+            font-weight: 800;
+        }
+
+        .user-info b {
+            font-size: 0.9rem; 
+            color: darkblue; 
+            display: block;
+        }
+
+        .user-info span {
+            font-size: 0.8rem; 
+            color: rgb(98, 97, 97);
+        }
+
+        .stars { 
+            font-size: 0.85rem;
+            color: #ffc107;
+        }
+
+        .prof {
+            margin: 10px 0; 
+            background: #eef4ff; 
+            color: darkblue; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            padding: 5px 10px; 
+            border-radius: 20px; 
+            display: inline-block;
+        }
+
+        .card p {
+            font-size: 0.88rem; 
+            color: rgb(59, 59, 59); 
+            line-height: 1.5;
+        }
+
+        footer {
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 0.85rem;
+            background-color: rgb(72, 72, 187);
+            margin-top: auto;
+        }
+
+       
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgb(15, 15, 96);
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+                z-index: 1000;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .filho2, .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filho2 > div[style*="grid-column"] {
+                grid-column: span 1 !important;
+            }
+
+            .Coroa h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div id="menu-icon"><img src="icone-removebg-preview.png" alt="Menu"></div>
+            <div class="logo"> <img src="Gemini_Generated_Image_lz5nrtlz5nrtlz5n-removebg-preview.png" alt="CBN Logo"></div>
+        </div>
+        
+        <nav id="navMenu">
+            <a href="index.html.html">Início</a>
+            <a href="Comentario.html" class="ativo">Comentários</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="Opcoes.html" class="btn-cadastrar">👤 Cadastrar-se</a>
+        </nav>
+    </header>
+        
+    <main>
+        <div class="Coroa">
+            <h1>Comentários dos Clientes</h1>
+            <p>Veja o que falam sobre os profissionais do CBN</p>
+        </div>
+
+        <div class="Rei">
+            <div class="filho1">
+                <h2>Deixe seu comentário 💬</h2>
+
+                <form id="formComentario">
+                    <div class="filho2">
+                        <div>
+                            <label>Seu nome</label>
+                            <input type="text" id="nomeInput" placeholder="Seu nome" required>
+                        </div>
+
+                        <div>
+                            <label>Profissional</label>
+                            <select id="profissionalSelect" required>
+                                <option value="">Selecione o Profissional</option>
+                                <option value="Assane - Mecânico">Assane - Mecânico</option>
+                                <option value="Manuel - Carpintaria">Manuel - Carpintaria</option>
+                                <option value="Inoque - Canalização">Inoque - Canalização</option>
+                                <option value="Manhiça - Alfaiataria">Manhiça - Alfaiataria</option>
+                                <option value="Dinis - Eletricista">Dinis - Eletricista</option>
+                            </select>
+                        </div>
+
+                        <div style="grid-column: span 2;">
+                            <label>Sua avaliação</label>
+                            <div class="stars-select" id="starsSelect" data-rating="5">⭐⭐⭐⭐⭐</div>
+                        </div>
+
+                        <div style="grid-column: span 2;">
+                            <label>Seu comentário</label>
+                            <textarea id="mensagemInput" placeholder="Como foi o serviço?" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-enviar">Publicar Comentário</button>
+                </form>
+            </div>
+
+            <h2 class="titulo-lista">Comentários recentes</h2>
+
+            <div class="grid" id="listaComentarios">
+                <div class="card">
+                    <div class="card-top">
+                        <div class="user">
+                            <div class="avatar">A</div>
+                            <div class="user-info"><b>Arlinda Ambrósio</b><span>20 set 2026</span></div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="prof">Mecânico - Manuel Latifo</div>
+                    <p>Profissional muito atencioso e resolveu o problema do meu carro rapidamente. Recomendo!</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <div class="user">
+                            <div class="avatar">FM</div>
+                            <div class="user-info"><b>Fania M</b><span>22 set 2026</span></div>
+                        </div>
+                        <div class="stars">⭐⭐⭐</div>
+                    </div>
+                    <div class="prof">Carpinteiro - MANHIÇA</div>
+                    <p>Trabalho de ótima qualidade, entrega no prazo. Resultado final ficou excelente.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <div class="user">
+                            <div class="avatar">AM</div>
+                            <div class="user-info"><b>Anifa Muze</b><span>10 set 2026</span></div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="prof">Eletricista - Dinis</div>
+                    <p>Excelente instalação, muito profissional e seguro. Deixou tudo limpo após o serviço.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <div class="user">
+                            <div class="avatar">AB</div>
+                            <div class="user-info"><b>Assane Bachir</b><span>27 set 2026</span></div>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="prof">Canalizador - INOQUE</div>
+                    <p>Resolveu o vazamento em menos de uma hora, honesto e preço justo. Recomendo!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; CBN 2026. Todos os direitos reservados | Termos de Uso | Política de Privacidade
+    </footer> 
+
+    <script>
+      
+        const menuIcon = document.getElementById('menu-icon');
+        const navMenu = document.getElementById('navMenu');
+
+        menuIcon.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+       
+        const starsSelect = document.getElementById('starsSelect');
+        const starOptions = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"];
+        let currentRating = 5;
+
+        starsSelect.addEventListener('click', () => {
+            currentRating = currentRating >= 5 ? 1 : currentRating + 1;
+            starsSelect.textContent = starOptions[currentRating - 1];
+            starsSelect.setAttribute('data-rating', currentRating);
+        });
+
+       
+        const formComentario = document.getElementById('formComentario');
+        const listaComentarios = document.getElementById('listaComentarios');
+
+        formComentario.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nome = document.getElementById('nomeInput').value.trim();
+            const profissional = document.getElementById('profissionalSelect').value;
+            const mensagem = document.getElementById('mensagemInput').value.trim();
+            const rating = parseInt(starsSelect.getAttribute('data-rating'));
+
+            if (!nome || !profissional || !mensagem) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+          
+            const iniciais = nome.split(' ')
+                .map(n => n[0])
+                .slice(0, 2)
+                .join('')
+                .toUpperCase();
+
+            const dataAtual = new Date().toLocaleDateString('pt-MZ', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            });
+
+            const estrelasStr = '⭐'.repeat(rating);
+
+           
+            const novoCard = document.createElement('div');
+            novoCard.className = 'card';
+            novoCard.innerHTML = `
+                <div class="card-top">
+                    <div class="user">
+                        <div class="avatar">${iniciais}</div>
+                        <div class="user-info"><b>${nome}</b><span>${dataAtual}</span></div>
+                    </div>
+                    <div class="stars">${estrelasStr}</div>
+                </div>
+                <div class="prof">${profissional}</div>
+                <p>${mensagem}</p>
+            `;
+
+           
+            listaComentarios.insertBefore(novoCard, listaComentarios.firstChild);
+
+       
+            formComentario.reset();
+            currentRating = 5;
+            starsSelect.textContent = "⭐⭐⭐⭐⭐";
+            starsSelect.setAttribute('data-rating', '5');
+
+            alert("Comentário publicado com sucesso!");
+        });
+    </script>
+</body>
+</html>

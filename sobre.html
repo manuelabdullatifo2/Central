@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBN - Sobre Nós</title>
+
+    <style>
+        :root {
+            --azul-escuro: #0f2f66;
+            --azul: #1a5db5;
+            --azul-claro: #5c93e8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgb(15, 15, 96);
+            padding: 10px 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 180px;
+            height: auto;
+            max-height: 70px;
+            object-fit: contain;
+        }
+
+        #menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        #menu-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            transition: opacity 0.2s;
+        }
+
+        .menu a:hover {
+            opacity: 1;
+        }
+
+        .menu a.ativo {
+            font-weight: 700;
+            border-bottom: 2px solid white;
+            padding-bottom: 3px;
+        }
+
+        .btn-cadastrar {
+            background-color: blue;
+            color: white !important;
+            padding: 8px 14px !important;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: linear-gradient(180deg, rgb(146, 146, 237), rgb(169, 229, 229));
+            text-align: center; 
+            padding: 60px 6% 80px;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem; 
+            font-weight: 800; 
+            color: var(--azul-escuro); 
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: var(--azul);
+        }
+
+        .hero p {
+            max-width: 680px; 
+            margin: 15px auto 0; 
+            color: #4b5563; 
+            font-size: 1.05rem; 
+            line-height: 1.6;
+        }
+
+        .stats-wrap {
+            margin-top: -30px; 
+            padding: 0 6%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats {
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: white; 
+            border-radius: 16px; 
+            padding: 22px 15px; 
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            border: 1px solid #eef2ff;
+        }
+
+        .stat-card b {
+            font-size: 1.7rem; 
+            color: var(--azul-escuro); 
+            display: block;
+        }
+
+        .stat-card span {
+            font-size: 0.85rem; 
+            color: #6b7280;
+            margin-top: 4px; 
+            display: block;
+        }
+
+        .container {
+            max-width: 1150px; 
+            margin: 0 auto; 
+            padding: 45px 6%;
+            width: 100%;
+        }
+
+        .grid-2 {
+            display: grid; 
+            grid-template-columns: 1.1fr 0.9fr; 
+            gap: 35px; 
+            align-items: center;
+        }
+
+        .box-white {
+            background: white; 
+            border-radius: 20px; 
+            padding: 32px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .box-white h2 {
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: var(--azul-escuro); 
+            margin-bottom: 12px;
+        }
+
+        .box-white p {
+            color: #555; 
+            line-height: 1.7; 
+            font-size: 0.95rem; 
+            margin-bottom: 12px;
+        }
+
+        .check {
+            display: flex; 
+            gap: 12px; 
+            margin: 14px 0; 
+            font-size: 0.9rem; 
+            align-items: center;
+        }
+
+        .check i {
+            width: 26px; 
+            height: 26px; 
+            background: #e0f0ff; 
+            color: var(--azul);
+            border-radius: 50%; 
+            display: grid; 
+            place-items: center; 
+            font-style: normal; 
+            font-weight: 900; 
+            flex-shrink: 0;
+        }
+
+        .img-sobre {
+            width: 100%; 
+            height: 420px; 
+            object-fit: cover; 
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .section-title {
+            text-align: center; 
+            font-weight: 800; 
+            font-size: 1.4rem; 
+            color: var(--azul-escuro); 
+            margin: 55px 0 25px;
+        }
+
+        .valores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 22px;
+        }
+
+        .valor-card {
+            background: white; 
+            border-radius: 20px; 
+            padding: 26px; 
+            text-align: left;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06); 
+            border: 1px solid #f0f3ff;
+        }
+
+        .valor-icon {
+            width: 46px;
+            height: 46px; 
+            background: #eef4ff; 
+            border-radius: 12px;
+            display: grid; 
+            place-items: center; 
+            font-size: 1.4rem; 
+            margin-bottom: 14px;
+        }
+
+        .valor-card h3 {
+            font-size: 1rem; 
+            margin-bottom: 6px;
+            color: var(--azul-escuro);
+        }
+
+        .valor-card p {
+            font-size: 0.88rem; 
+            color: #6b7280; 
+            line-height: 1.6;
+        }
+
+        .cta {
+            background: linear-gradient(90deg, var(--azul-escuro), var(--azul));
+            border-radius: 20px; 
+            padding: 45px 25px; 
+            text-align: center; 
+            color: white; 
+            margin-top: 45px;
+        }
+
+        .cta h2 {
+            font-size: 1.7rem; 
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            opacity: 0.9; 
+            margin-bottom: 22px; 
+            font-size: 0.95rem;
+        }
+
+        .btn-branco {
+            background: white; 
+            color: var(--azul-escuro); 
+            padding: 12px 28px;
+            border-radius: 30px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            display: inline-block; 
+            transition: 0.3s;
+        }
+
+        .btn-branco:hover {
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 0.85rem;
+            background-color: rgb(72, 72, 187);
+            margin-top: auto;
+        }
+
+        
+        @media(max-width: 900px) {
+            #menu-icon {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgb(15, 15, 96);
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+                z-index: 1000;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .valores {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .img-sobre {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div id="menu-icon"><img src="icone-removebg-preview.png" alt="Menu"></div>
+            <div class="logo"> <img src="Gemini_Generated_Image_lz5nrtlz5nrtlz5n-removebg-preview.png" alt="CBN Logo"></div>
+        </div>
+
+        <nav class="menu" id="navMenu">
+            <a href="pagina principal.html">Início</a>
+            <a href="Comentario.html">Comentários</a>
+            <a href="sobre.html" class="ativo">Sobre</a>
+            <a href="opcoes.html" class="btn-cadastrar">👤 Cadastrar-se</a>
+        </nav>
+    </header>
+        
+    <main>
+        <section class="hero">
+            <h1>Somos a <span>Central Business Nacala</span></h1>
+            <p>Conectamos quem precisa de serviços com os melhores profissionais de Nacala-Porto. Tudo de forma simples, confiável e rápida.</p>
+        </section>
+
+        <div class="stats-wrap">
+            <div class="stats">
+                <div class="stat-card"><b>500+</b><span>Profissionais Cadastrados</span></div>
+                <div class="stat-card"><b>2.500+</b><span>Serviços Realizados</span></div>
+                <div class="stat-card"><b>4.8 ⭐</b><span>Avaliação Média</span></div>
+                <div class="stat-card"><b>15+</b><span>Bairros Atendidos</span></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="grid-2">
+                <div class="box-white">
+                    <h2>Nossa Missão</h2>
+                    <p>Em Nacala, encontrar um bom profissional era difícil. Era preciso perguntar a vizinhos, ir de porta em porta. O CBN nasceu para resolver isso.</p>
+                    <p>Nossa missão é <strong>valorizar o trabalho local</strong> e dar visibilidade aos mestres que constroem nossa cidade todos os dias.</p>
+                    
+                    <div class="check"><i>✅</i> Profissionais verificados e avaliados por clientes reais</div>
+                    <div class="check"><i>✅</i> Contato direto via WhatsApp, sem intermediários</div>
+                    <div class="check"><i>✅</i> Preços transparentes e localização por bairro</div>
+                </div>
+                <img class="img-sobre" src="gemi.png" alt="Equipe CBN">
+            </div>
+
+            <h2 class="section-title">Nossos Valores</h2>
+            <div class="valores">
+                <div class="valor-card">
+                    <div class="valor-icon">🤝</div>
+                    <h3>Confiança Local</h3>
+                    <p>Todos os profissionais são de Nacala e recomendados pela comunidade. Verificamos cada perfil.</p>
+                </div>
+
+                <div class="valor-card">
+                    <div class="valor-icon">⚡</div>
+                    <h3>Rapidez</h3>
+                    <p>Encontre e contacte um profissional em menos de 2 minutos, 24h por dia, direto no WhatsApp.</p>
+                </div>
+
+                <div class="valor-card">
+                    <div class="valor-icon">💙</div>
+                    <h3>Impacto Social</h3>
+                    <p>Ajudamos mestres artesãos a terem mais clientes, mais visibilidade e renda digna para suas famílias.</p>
+                </div>
+            </div>
+
+            <div class="cta">
+                <h2>Faz parte do CBN</h2>
+                <p>É profissional em Nacala? Cadastre-se gratuitamente e receba clientes todos os dias no seu WhatsApp.</p>
+                <a href="opcoes.html" class="btn-branco">Quero me Cadastrar</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; CBN 2026. Todos os direitos reservados | Termos de Uso | Política de Privacidade
+    </footer>
+
+    <script>
+    
+        const menuIcon = document.getElementById('menu-icon');
+        const navMenu = document.getElementById('navMenu');
+
+        menuIcon.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+       
+        const menuLinks = navMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

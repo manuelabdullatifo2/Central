@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBN - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: url('Carpintaria.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container-login {
+            width: 100%;
+            max-width: 450px;
+            background-color: whitesmoke;
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-login img {
+            width: 220px;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .form-grupo {
+            text-align: left;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        .form-grupo label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .form-grupo input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-grupo input:focus {
+            border-color: #0056b3;
+        }
+
+        .btn-entrar {
+            width: 100%;
+            padding: 12px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn-entrar:hover {
+            background-color: #003d82;
+            transform: translateY(-2px);
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #0f2f66;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .links a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+     
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .container-login {
+                padding: 25px 18px;
+            }
+
+            .logo-login img {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-login">
+        <div class="logo-login">
+            <img src="Gemini_Generated_Image_lz5nrtlz5nrtlz5n-removebg-preview.png" alt="CBN Logo">
+        </div>
+
+        <form id="formLogin">
+            <div class="form-grupo">
+                <label>Número / E-mail</label>
+                <input type="text" id="loginInput" placeholder="Insira seu número ou e-mail" required>
+            </div>
+
+            <div class="form-grupo">
+                <label>Senha</label>
+                <input type="password" id="senhaInput" placeholder="Digite sua senha" required>
+            </div>
+
+            <button type="submit" class="btn-entrar">ENTRAR</button>
+        </form>
+
+        <div class="links">
+            <a href="Opcoes.html">Criar nova conta</a>
+        </div>
+
+        <footer>
+            &copy; CBN 2026, Nacala-Porto. Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <script>
+       
+        const formLogin = document.getElementById('formLogin');
+
+        formLogin.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const usuario = document.getElementById('loginInput').value.trim();
+            const senha = document.getElementById('senhaInput').value;
+
+            if (usuario === "" || senha === "") {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+           
+            alert("Login efetuado com sucesso! Redirecionando...");
+            window.location.href = "pagina principal.html";
+        });
+    </script>
+</body>
+</html>
